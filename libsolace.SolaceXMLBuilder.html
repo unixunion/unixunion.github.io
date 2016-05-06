@@ -152,25 +152,35 @@
 <em class="property">class </em><code class="descclassname">libsolace.SolaceXMLBuilder.</code><code class="descname">SolaceXMLBuilder</code><span class="sig-paren">(</span><em>description=None</em>, <em>version=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libsolace/SolaceXMLBuilder.html#SolaceXMLBuilder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libsolace.SolaceXMLBuilder.SolaceXMLBuilder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Builds Solace&#8217;s SEMP XML Configuration Commands</p>
-<p>Creating a instance of this, and then calling any obj on the instance, will create
+<blockquote>
+<div><p>Creating a instance of this, and then calling any obj on the instance, will create
 nested XML tags if the element does not exist, or return the element if it does exist
 for recursive instantiation.</p>
 <p>THe only limitatoin here is that there can only be ONE root node, &#8220;foo&#8221; in the example below.</p>
-<dl class="docutils">
-<dt>Example</dt>
-<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">=</span><span class="n">SolaceXMLBuilder</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s2">&quot;soltr/6_2&quot;</span><span class="p">)</span>
+<p>Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">libsolace.SolaceXMLBuilder</span> <span class="k">import</span> <span class="n">SolaceXMLBuilder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">=</span><span class="n">SolaceXMLBuilder</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s2">&quot;soltr/6_2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">foo</span><span class="o">.</span><span class="n">bar</span><span class="o">.</span><span class="n">baz</span><span class="o">=</span><span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">foo</span><span class="o">.</span><span class="n">banana</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">foo</span><span class="o">.</span><span class="n">banana</span>
+<span class="go">OrderedDict()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="go">&#39;&lt;rpc semp-version=&quot;soltr/6_2&quot;&gt;&lt;foo&gt;&lt;bar&gt;&lt;baz&gt;2&lt;/baz&gt;&lt;/bar&gt;&lt;banana&gt;5&lt;/banana&gt;&lt;/foo&gt;&lt;/rpc&gt;&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">bar</span><span class="o">.</span><span class="n">zoo</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="go">&#39;&lt;rpc semp-version=&quot;soltr/6_2&quot;&gt;&lt;foo&gt;&lt;bar&gt;&lt;baz&gt;2&lt;/baz&gt;&lt;/bar&gt;&lt;banana/&gt;&lt;/foo&gt;&lt;/rpc&gt;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">bar</span><span class="o">.</span><span class="n">zoo</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># different ROOT will break repr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">ERROR:root:the root leaf node was not found, maybe you registered two roots!</span>
 <span class="gt">Traceback (most recent call last):</span>
   File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
-<span class="gr">AttributeError</span>: <span class="n">&#39;int&#39; object has no attribute &#39;zoo&#39;</span>
+  File <span class="nb">&quot;libsolace/SolaceXMLBuilder.py&quot;</span>, line <span class="m">60</span>, in <span class="n">__repr__</span>
+    <span class="n">complete_xml</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;&lt;rpc semp-version=&quot;</span><span class="si">%s</span><span class="s1">&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/rpc&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">,</span> <span class="n">myxml</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">)))</span>
+  File <span class="nb">&quot;libsolace/util.py&quot;</span>, line <span class="m">178</span>, in <span class="n">display</span>
+    <span class="n">complete_xml</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;</span>
 </pre></div>
 </div>
-</dd>
-</dl>
+</div></blockquote>
+<p>&lt;rpc semp-version=&#8221;%s&#8221;&gt;
+%s&lt;/rpc&gt;&#8217; % (version, self.root.toprettyxml(indent=&#8221;  &#8221;)))</p>
+<blockquote>
+<div>AttributeError: d2x instance has no attribute &#8216;root&#8217;</div></blockquote>
 </dd></dl>
 
 </div>

@@ -168,15 +168,25 @@
 <span class="sd">    THe only limitatoin here is that there can only be ONE root node, &quot;foo&quot; in the example below.</span>
 
 <span class="sd">    Example</span>
+
+<span class="sd">        &gt;&gt;&gt; from libsolace.SolaceXMLBuilder import SolaceXMLBuilder</span>
 <span class="sd">        &gt;&gt;&gt; a=SolaceXMLBuilder(version=&quot;soltr/6_2&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; a.foo.bar.baz=2</span>
-<span class="sd">        &gt;&gt;&gt; a.foo.banana = 5</span>
+<span class="sd">        &gt;&gt;&gt; a.foo.banana</span>
+<span class="sd">        OrderedDict()</span>
 <span class="sd">        &gt;&gt;&gt; str(a)</span>
-<span class="sd">        &#39;&lt;rpc semp-version=&quot;soltr/6_2&quot;&gt;&lt;foo&gt;&lt;bar&gt;&lt;baz&gt;2&lt;/baz&gt;&lt;/bar&gt;&lt;banana&gt;5&lt;/banana&gt;&lt;/foo&gt;&lt;/rpc&gt;&#39;</span>
-<span class="sd">        &gt;&gt;&gt; a.bar.zoo = 2</span>
+<span class="sd">        &#39;&lt;rpc semp-version=&quot;soltr/6_2&quot;&gt;&lt;foo&gt;&lt;bar&gt;&lt;baz&gt;2&lt;/baz&gt;&lt;/bar&gt;&lt;banana/&gt;&lt;/foo&gt;&lt;/rpc&gt;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; a.bar.zoo = 2 # different ROOT will break repr</span>
+<span class="sd">        &gt;&gt;&gt; str(a)</span>
+<span class="sd">        ERROR:root:the root leaf node was not found, maybe you registered two roots!</span>
 <span class="sd">        Traceback (most recent call last):</span>
 <span class="sd">          File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span>
-<span class="sd">        AttributeError: &#39;int&#39; object has no attribute &#39;zoo&#39;</span>
+<span class="sd">          File &quot;libsolace/SolaceXMLBuilder.py&quot;, line 60, in __repr__</span>
+<span class="sd">            complete_xml = str(&#39;&lt;rpc semp-version=&quot;%s&quot;&gt;%s&lt;/rpc&gt;&#39; % (self.version, myxml.display(version=self.version)))</span>
+<span class="sd">          File &quot;libsolace/util.py&quot;, line 178, in display</span>
+<span class="sd">            complete_xml = str(&#39;\n&lt;rpc semp-version=&quot;%s&quot;&gt;\n%s&lt;/rpc&gt;&#39; % (version, self.root.toprettyxml(indent=&quot;  &quot;)))</span>
+<span class="sd">        AttributeError: d2x instance has no attribute &#39;root&#39;</span>
+
 
 <span class="sd">    &quot;&quot;&quot;</span>
 

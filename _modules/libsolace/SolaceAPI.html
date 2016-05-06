@@ -167,7 +167,7 @@
 <span class="kn">from</span> <span class="nn">libsolace.util</span> <span class="kn">import</span> <span class="n">httpRequest</span><span class="p">,</span> <span class="n">generateRequestHeaders</span><span class="p">,</span> <span class="n">generateBasicAuthHeader</span>
 
 
-<div class="viewcode-block" id="SolaceAPI"><a class="viewcode-back" href="../../libsolace.SolaceAPI.html#libsolace.SolaceAPI.SolaceAPI">[docs]</a><span class="k">class</span> <span class="nc">SolaceAPI</span><span class="p">:</span>
+<div class="viewcode-block" id="SolaceAPI"><a class="viewcode-back" href="../../index.html#libsolace.SolaceAPI.SolaceAPI">[docs]</a><span class="k">class</span> <span class="nc">SolaceAPI</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Connects to a Solace cluster&#39;s *primary* and *backup* appliance(s)</span>
 
@@ -409,7 +409,7 @@
             <span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Solace Error </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
             <span class="k">raise</span>
 
-<div class="viewcode-block" id="SolaceAPI.get_redundancy"><a class="viewcode-back" href="../../libsolace.SolaceAPI.html#libsolace.SolaceAPI.SolaceAPI.get_redundancy">[docs]</a>    <span class="k">def</span> <span class="nf">get_redundancy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SolaceAPI.get_redundancy"><a class="viewcode-back" href="../../index.html#libsolace.SolaceAPI.SolaceAPI.get_redundancy">[docs]</a>    <span class="k">def</span> <span class="nf">get_redundancy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return redundancy status</span>
 
@@ -423,7 +423,7 @@
         <span class="n">request</span><span class="o">.</span><span class="n">show</span><span class="o">.</span><span class="n">redundancy</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rpc</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">request</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="SolaceAPI.get_memory"><a class="viewcode-back" href="../../libsolace.SolaceAPI.html#libsolace.SolaceAPI.SolaceAPI.get_memory">[docs]</a>    <span class="k">def</span> <span class="nf">get_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SolaceAPI.get_memory"><a class="viewcode-back" href="../../index.html#libsolace.SolaceAPI.SolaceAPI.get_memory">[docs]</a>    <span class="k">def</span> <span class="nf">get_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Returns the Memory Usage</span>
 
 <span class="sd">        Example of request XML</span>
@@ -437,7 +437,7 @@
         <span class="n">request</span><span class="o">.</span><span class="n">show</span><span class="o">.</span><span class="n">memory</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rpc</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">request</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="SolaceAPI.get_message_spool"><a class="viewcode-back" href="../../libsolace.SolaceAPI.html#libsolace.SolaceAPI.SolaceAPI.get_message_spool">[docs]</a>    <span class="k">def</span> <span class="nf">get_message_spool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="SolaceAPI.get_message_spool"><a class="viewcode-back" href="../../index.html#libsolace.SolaceAPI.SolaceAPI.get_message_spool">[docs]</a>    <span class="k">def</span> <span class="nf">get_message_spool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; show message spool</span>
 <span class="sd">        :param version:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -455,7 +455,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unknown message-spool operational-status &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">message_spool</span><span class="p">[</span><span class="s1">&#39;operational-status&#39;</span><span class="p">])</span>
 
-<div class="viewcode-block" id="SolaceAPI.rpc"><a class="viewcode-back" href="../../libsolace.SolaceAPI.html#libsolace.SolaceAPI.SolaceAPI.rpc">[docs]</a>    <span class="k">def</span> <span class="nf">rpc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xml</span><span class="p">,</span> <span class="n">allowfail</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">primaryOnly</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">backupOnly</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">xml_response</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="SolaceAPI.rpc"><a class="viewcode-back" href="../../index.html#libsolace.SolaceAPI.SolaceAPI.rpc">[docs]</a>    <span class="k">def</span> <span class="nf">rpc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xml</span><span class="p">,</span> <span class="n">allowfail</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">primaryOnly</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">backupOnly</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">xml_response</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Execute a SEMP command on the appliance(s), call with a string representation</span>
 <span class="sd">        of a SolaceXMLBuilder instance.</span>
@@ -548,7 +548,7 @@
             <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;responses: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">responses</span><span class="p">)</span>
             <span class="k">raise</span></div>
 
-<div class="viewcode-block" id="SolaceAPI.manage"><a class="viewcode-back" href="../../libsolace.SolaceAPI.html#libsolace.SolaceAPI.SolaceAPI.manage">[docs]</a>    <span class="k">def</span> <span class="nf">manage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plugin_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="SolaceAPI.manage"><a class="viewcode-back" href="../../index.html#libsolace.SolaceAPI.SolaceAPI.manage">[docs]</a>    <span class="k">def</span> <span class="nf">manage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plugin_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets a plugin, configures it, then allows direct communication with it.</span>
 
