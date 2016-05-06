@@ -144,12 +144,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-libsolace">
-<span id="libsolace-package"></span><h1>libsolace package<a class="headerlink" href="#module-libsolace" title="Permalink to this headline">¶</a></h1>
-<p>libsolace is a python library to manage the configuration of Solace messaging appliances. This project has a modular
+  <div class="section" id="libsolace-package">
+<h1>libsolace package<a class="headerlink" href="#libsolace-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="main-package">
+<h2>Main Package<a class="headerlink" href="#main-package" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-libsolace"></span><p>libsolace is a python library to manage the configuration of Solace messaging appliances. This project has a modular
 design which provides the basic features required to manage pairs of Solace Appliances.</p>
 <div class="section" id="basics">
-<h2>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h2>
+<h3>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><p>Managed objects within Solace are managed through <a class="reference internal" href="libsolace.plugin.html#libsolace.plugin.Plugin" title="libsolace.plugin.Plugin"><code class="xref py py-class docutils literal"><span class="pre">plugin.Plugin</span></code></a>. Plugins are used to create SEMP requests,
 which can then be posted to the appliance through a <a class="reference internal" href="libsolace.SolaceAPI.html#libsolace.SolaceAPI.SolaceAPI" title="libsolace.SolaceAPI.SolaceAPI"><code class="xref py py-class docutils literal"><span class="pre">SolaceAPI.SolaceAPI</span></code></a> instance.</p>
@@ -167,8 +169,131 @@ which will also validate the request against the appropriate XSD for the version
 </div>
 </div>
 </div>
-<div class="section" id="solace-provisioning">
-<h1>Solace Provisioning<a class="headerlink" href="#solace-provisioning" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installing">
+<h2>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h2>
+<p>You need libyaml-devel or equivilant for your OS.</p>
+<p>For debian means install:</p>
+<blockquote>
+<div><ul class="simple">
+<li>libxslt1-dev</li>
+<li>libxml2-dev</li>
+<li>python-dev</li>
+</ul>
+</div></blockquote>
+<p>and then run:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>python setup.py install
+</pre></div>
+</div>
+</div>
+<div class="section" id="provisioning-quickstart">
+<h2>Provisioning Quickstart<a class="headerlink" href="#provisioning-quickstart" title="Permalink to this headline">¶</a></h2>
+<p>libsolace can be used as is for some basic provisioning which should be enough to get you started. In the main directory
+<cite>python-libsolace</cite>, create the following two YAML files.</p>
+<p><cite>libsolace.yaml</cite></p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>---
+# the url you might want to serve the site config from if not using local files
+CMDB_URL: &quot;http://someurl/site.xml&quot;
+CMDB_FILE: &quot;provision-example.yaml&quot;
+CMDB_USER: &quot;&quot;
+CMDB_PASS: &quot;&quot;
+
+
+# the readonly user to use for test mode
+READ_ONLY_USER: readonly
+READ_ONLY_PASS: readonly
+
+
+# the naming standard to use, default is &lt;env&gt;_&lt;name&gt; if CMDB Client supports it.
+NAMEHOOK: ZoinksNamingStandard
+
+
+# list of all plugins to load
+PLUGINS:
+  - libsolace.items.SolaceACLProfile
+  - libsolace.items.SolaceUser
+  - libsolace.items.SolaceUsers
+  - libsolace.items.SolaceVPN
+  - libsolace.items.SolaceQueue
+  - libsolace.plugins.NamingStandard
+  - libsolace.plugins.ZoinksNamingStandard
+  - libsolace.items.SolaceClientProfile
+  - libsolace.plugins.Utilities
+  - libsolace.plugins.InfluxDBClient
+  - libsolace.plugins.YAMLClient
+
+
+# the plugin name as registered in the registry we want to use for solace config
+SOLACE_CMDB_PLUGIN: YAMLClient
+
+
+# The plugin to use for Solace Queue management
+SOLACE_QUEUE_PLUGIN: SolaceQueue
+SOLACE_USER_PLUGIN: SolaceUser
+
+
+# mapping of environment to solace appliances
+SOLACE_CONF:
+  dev:
+   MGMT:
+      - http://appliance.fqdn:8080/SEMP
+   PASS: admin
+   USER: admin
+</pre></div>
+</div>
+<p>provision-example.yaml</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>VPNS:
+  SolaceTest:
+    -
+      vpn_config:
+        spool_size: 1024
+      password: d0nt_u5e_th1s
+      id: au_testvpn
+      name: au_testvpn
+    -
+      owner: SolaceTest
+      vpn_config:
+        spool_size: 1024
+      password: d0nt_u5e_th1s
+      id: au_testvpn2
+      name: au_testvpn2
+
+
+QUEUES:
+  au_testvpn:
+    -
+      name: testqueue1
+      queue_config:
+        exclusive: &quot;true&quot;
+        queue_size: 4096
+        retries: 0
+        max_bind_count: 1000
+        owner: au_testproductA
+        consume: all
+
+
+USERS:
+  au_testvpn:
+    -
+      username: au_testproductA
+      password: somepassword
+
+
+  au_testvpn2:
+    -
+      username: au_testproductA
+      password: somepassword
+</pre></div>
+</div>
+<p>And then finally run wither of the following depending on if you have a cluster or standalone appliance.</p>
+<p>Single appliance:
+.. code-block:: none</p>
+<blockquote>
+<div>./bin/solace-provision.py -e dev &#8211;no-detect-status -p SolaceTest &#8211;soltr_version=&#8221;soltr/7_1_1&#8221;</div></blockquote>
+<p>Cluster
+.. code-block:: none</p>
+<blockquote>
+<div>./bin/solace-provision.py -e dev -p SolaceTest</div></blockquote>
+</div>
 <div class="section" id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
