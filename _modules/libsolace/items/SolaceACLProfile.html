@@ -174,10 +174,10 @@
 
 <span class="sd">        Example:</span>
 
-<span class="sd">        &gt;&gt;&gt; from libsolace.SolaceAPI import SolaceAPI</span>
-<span class="sd">        &gt;&gt;&gt; client = SolaceAPI(&quot;dev&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; client.manage(&quot;SolaceACLProfile&quot;, name=&quot;myprofile&quot;, vpn_name=&quot;testvpn&quot;).commands.commands</span>
-<span class="sd">        [XML, XML, XML]</span>
+<span class="sd">            &gt;&gt;&gt; from libsolace.SolaceAPI import SolaceAPI</span>
+<span class="sd">            &gt;&gt;&gt; client = SolaceAPI(&quot;dev&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; client.manage(&quot;SolaceACLProfile&quot;, name=&quot;myprofile&quot;, vpn_name=&quot;testvpn&quot;).commands.commands</span>
+<span class="sd">            [XML, XML, XML]</span>
 
 <span class="sd">        :type api: SolaceAPI</span>
 <span class="sd">        :param api: the api (passed in automatically if instantiated via SolaceAPI.manage</span>
@@ -235,9 +235,9 @@
 
 <span class="sd">        Example:</span>
 
-<span class="sd">        &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; request = api.manage(&quot;SolaceACLProfile&quot;).new_acl(name=&quot;myprofile&quot;, vpn_name=&quot;dev_testvpn&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; # response = api.rpc(request)</span>
+<span class="sd">            &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; request = api.manage(&quot;SolaceACLProfile&quot;).new_acl(name=&quot;myprofile&quot;, vpn_name=&quot;dev_testvpn&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; # response = api.rpc(request)</span>
 
 <span class="sd">        :param name: name of the profile</span>
 <span class="sd">        :param vpn_name: vpn name</span>
@@ -258,6 +258,7 @@
         <span class="sd">&quot;&quot;&quot;Allow publish</span>
 
 <span class="sd">        Example:</span>
+
 <span class="sd">            &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; request = api.manage(&quot;SolaceACLProfile&quot;).allow_publish(name=&quot;myprofile&quot;, vpn_name=&quot;dev_testvpn&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; # response = api.rpc(request)</span>

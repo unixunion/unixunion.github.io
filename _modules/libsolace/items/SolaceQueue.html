@@ -343,13 +343,9 @@
 <span class="sd">        :returns: single SEMP request</span>
 
 <span class="sd">        Example 1: Create Request, then Execute</span>
+
 <span class="sd">        &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; request = api.manage(&quot;SolaceQueue&quot;).create_queue(vpn_name=&quot;dev_testvpn&quot;, queue_name=&quot;my_test_queue&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; # response = api.rpc(request)</span>
-
-<span class="sd">        Example 2: One Shot</span>
-<span class="sd">        &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; request = api.manage(&quot;SolaceQueue&quot;).create_queue(vpn_name=&quot;dev_testvpn&quot;, queue_name=&quot;my_test_queue2&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; # response = api.rpc(request)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -384,7 +380,6 @@
 <span class="sd">        &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; request = api.manage(&quot;SolaceQueue&quot;).shutdown_egress(shutdown_on_apply=True, vpn_name=&quot;dev_testvpn&quot;, queue_name=&quot;testqueue1&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; # response = api.rpc(request)</span>
-<span class="sd">        &quot;&quot;</span>
 
 <span class="sd">        Example 2: Create Request, then Execute</span>
 

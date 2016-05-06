@@ -159,30 +159,28 @@
 <div class="viewcode-block" id="SolaceClientProfile"><a class="viewcode-back" href="../../../libsolace.items.SolaceClientProfile.html#libsolace.items.SolaceClientProfile.SolaceClientProfile">[docs]</a><span class="k">class</span> <span class="nc">SolaceClientProfile</span><span class="p">(</span><span class="n">Plugin</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Create / Manage client profiles</span>
 
-<span class="sd">    Description</span>
-<span class="sd">    ===========</span>
-<span class="sd">        This plugin manages Client Profiles within Solace. Typically you should invoke this plugin via :class:`libsolace.SolaceAPI.SolaceAPI`</span>
+<span class="sd">    This plugin manages Client Profiles within Solace. Typically you should invoke this plugin via :class:`libsolace.SolaceAPI.SolaceAPI`</span>
 
-<span class="sd">        Please see :class:`libsolace.plugin.Plugin` for how plugins are instantiated and used.</span>
+<span class="sd">    Please see :class:`libsolace.plugin.Plugin` for how plugins are instantiated and used.</span>
 
-<span class="sd">    Example of Instantiation outside of SolaceAPI</span>
+<span class="sd">    Example of direct instantiation and passing in a instance SolaceAPI</span>
 
-<span class="sd">    &gt;&gt;&gt; import libsolace.settingsloader as settings</span>
-<span class="sd">    &gt;&gt;&gt; import libsolace</span>
-<span class="sd">    &gt;&gt;&gt; from libsolace.SolaceAPI import SolaceAPI</span>
-<span class="sd">    &gt;&gt;&gt; clazz = libsolace.plugin_registry(&quot;SolaceClientProfile&quot;, settings=settings)</span>
-<span class="sd">    &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
-<span class="sd">    &gt;&gt;&gt; scp = clazz(settings=settings, api=api)</span>
-<span class="sd">    &gt;&gt;&gt; client_dict = scp.get(api=api, name=&quot;default&quot;, vpn_name=&quot;default&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; import libsolace.settingsloader as settings</span>
+<span class="sd">        &gt;&gt;&gt; import libsolace</span>
+<span class="sd">        &gt;&gt;&gt; from libsolace.SolaceAPI import SolaceAPI</span>
+<span class="sd">        &gt;&gt;&gt; clazz = libsolace.plugin_registry(&quot;SolaceClientProfile&quot;, settings=settings)</span>
+<span class="sd">        &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; scp = clazz(settings=settings, api=api)</span>
+<span class="sd">        &gt;&gt;&gt; client_dict = scp.get(api=api, name=&quot;default&quot;, vpn_name=&quot;default&quot;)</span>
 
-<span class="sd">    Example of Instantiation within the SolaceAPI</span>
+<span class="sd">    Example of Instantiation via the SolaceAPI manage method</span>
 
-<span class="sd">    &gt;&gt;&gt; import libsolace.settingsloader as settings</span>
-<span class="sd">    &gt;&gt;&gt; from libsolace.SolaceAPI import SolaceAPI</span>
-<span class="sd">    &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
-<span class="sd">    &gt;&gt;&gt; scp = api.manage(&quot;SolaceClientProfile&quot;)</span>
-<span class="sd">    &gt;&gt;&gt; client_dict = scp.get(api=api, name=&quot;default&quot;, vpn_name=&quot;default&quot;)</span>
-<span class="sd">    &gt;&gt;&gt; list_xml = api.manage(&quot;SolaceClientProfile&quot;, name=&quot;myprofile&quot;, vpn_name=&quot;dev_testvpn&quot;).commands.commands</span>
+<span class="sd">        &gt;&gt;&gt; import libsolace.settingsloader as settings</span>
+<span class="sd">        &gt;&gt;&gt; from libsolace.SolaceAPI import SolaceAPI</span>
+<span class="sd">        &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; scp = api.manage(&quot;SolaceClientProfile&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; client_dict = scp.get(api=api, name=&quot;default&quot;, vpn_name=&quot;default&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; list_xml = api.manage(&quot;SolaceClientProfile&quot;, name=&quot;myprofile&quot;, vpn_name=&quot;dev_testvpn&quot;).commands.commands</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -499,9 +497,6 @@
 <span class="sd">        &gt;&gt;&gt; request.xml</span>
 <span class="sd">        &#39;&lt;rpc semp-version=&quot;soltr/7_1_1&quot;&gt;&lt;client-profile&gt;&lt;name&gt;default&lt;/name&gt;&lt;vpn-name&gt;default&lt;/vpn-name&gt;&lt;allow-bridge-connections/&gt;&lt;/client-profile&gt;&lt;/rpc&gt;&#39;</span>
 <span class="sd">        &gt;&gt;&gt; # api.rpc(request)</span>
-
-
-<span class="sd">        &quot;&quot;</span>
 
 <span class="sd">        :param name: name of the profile</span>
 <span class="sd">        :param vpn_name: the name of the vpn to scope the request to</span>

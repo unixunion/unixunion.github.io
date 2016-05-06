@@ -158,7 +158,7 @@
 <span class="kn">from</span> <span class="nn">libsolace.util</span> <span class="kn">import</span> <span class="n">get_calling_module</span>
 
 
-<div class="viewcode-block" id="PluginClass"><a class="viewcode-back" href="../../libsolace.plugin.html#libsolace.plugin.PluginClass">[docs]</a><span class="k">class</span> <span class="nc">PluginClass</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+<div class="viewcode-block" id="PluginClass"><a class="viewcode-back" href="../../index.html#libsolace.plugin.PluginClass">[docs]</a><span class="k">class</span> <span class="nc">PluginClass</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This is a metaclass for construction only, see Plugin rather&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">clsname</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dct</span><span class="p">):</span>
@@ -166,7 +166,7 @@
         <span class="k">return</span> <span class="n">new_object</span></div>
 
 
-<div class="viewcode-block" id="Plugin"><a class="viewcode-back" href="../../libsolace.plugin.html#libsolace.plugin.Plugin">[docs]</a><span class="k">class</span> <span class="nc">Plugin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Plugin"><a class="viewcode-back" href="../../index.html#libsolace.plugin.Plugin">[docs]</a><span class="k">class</span> <span class="nc">Plugin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This is the plugin core object where all plugins should extend from and register too.</span>
 
 <span class="sd">    Plugin Example:</span>
@@ -220,7 +220,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Plugin Init: </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span>
 
-<div class="viewcode-block" id="Plugin.register"><a class="viewcode-back" href="../../libsolace.plugin.html#libsolace.plugin.Plugin.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_class</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="Plugin.register"><a class="viewcode-back" href="../../index.html#libsolace.plugin.Plugin.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_class</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Registers a object with the plugin registry, typically used as a decorator.</span>
 
@@ -288,7 +288,7 @@
                     <span class="s2">&quot;Please check the plugin is listed in the yaml config and that you have @libsolace.plugin_registry.register in the class&quot;</span><span class="p">)</span>
             <span class="k">raise</span>
 
-<div class="viewcode-block" id="Plugin.set_exists"><a class="viewcode-back" href="../../libsolace.plugin.html#libsolace.plugin.Plugin.set_exists">[docs]</a>    <span class="k">def</span> <span class="nf">set_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<div class="viewcode-block" id="Plugin.set_exists"><a class="viewcode-back" href="../../index.html#libsolace.plugin.Plugin.set_exists">[docs]</a>    <span class="k">def</span> <span class="nf">set_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;set_exists is used as caching in order to cut down on SEMP queries to validate existence of items. For example,</span>
 <span class="sd">        if you create a new VPN in &quot;batch&quot; mode, After the &quot;create-vpn&quot; XML is generated, set_exists is set to True so</span>
 <span class="sd">        subsequent requests decorated with the `only_if_exists` will function correctly since set_exists states that the</span>
@@ -303,7 +303,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">exists</span> <span class="o">=</span> <span class="n">state</span></div></div>
 
 
-<div class="viewcode-block" id="PluginResponse"><a class="viewcode-back" href="../../libsolace.plugin.html#libsolace.plugin.PluginResponse">[docs]</a><span class="k">class</span> <span class="nc">PluginResponse</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="PluginResponse"><a class="viewcode-back" href="../../index.html#libsolace.plugin.PluginResponse">[docs]</a><span class="k">class</span> <span class="nc">PluginResponse</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Encapsulating class for holding SEMP requests and their accompanying kwargs.</span>
 

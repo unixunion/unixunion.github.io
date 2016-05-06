@@ -167,8 +167,8 @@
 <em class="property">class </em><code class="descclassname">libsolace.items.SolaceACLProfile.</code><code class="descname">SolaceACLProfile</code><a class="reference internal" href="_modules/libsolace/items/SolaceACLProfile.html#SolaceACLProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libsolace.items.SolaceACLProfile.SolaceACLProfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plugin to manage AclProfiles</p>
 <blockquote>
-<div><p>This plugin manages ACL Profiles within Solace. Typically you should invoke this plugin via <a class="reference internal" href="libsolace.SolaceAPI.html#libsolace.SolaceAPI.SolaceAPI" title="libsolace.SolaceAPI.SolaceAPI"><code class="xref py py-class docutils literal"><span class="pre">libsolace.SolaceAPI.SolaceAPI</span></code></a></p>
-<p>Please see <a class="reference internal" href="libsolace.plugin.html#libsolace.plugin.Plugin" title="libsolace.plugin.Plugin"><code class="xref py py-class docutils literal"><span class="pre">libsolace.plugin.Plugin</span></code></a> for how plugins are instantiated and used.</p>
+<div><p>This plugin manages ACL Profiles within Solace. Typically you should invoke this plugin via <a class="reference internal" href="index.html#libsolace.SolaceAPI.SolaceAPI" title="libsolace.SolaceAPI.SolaceAPI"><code class="xref py py-class docutils literal"><span class="pre">libsolace.SolaceAPI.SolaceAPI</span></code></a></p>
+<p>Please see <a class="reference internal" href="index.html#libsolace.plugin.Plugin" title="libsolace.plugin.Plugin"><code class="xref py py-class docutils literal"><span class="pre">libsolace.plugin.Plugin</span></code></a> for how plugins are instantiated and used.</p>
 </div></blockquote>
 <dl class="method">
 <dt id="libsolace.items.SolaceACLProfile.SolaceACLProfile.allow_connect">
@@ -184,7 +184,7 @@
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="libsolace.plugin.html#libsolace.plugin.PluginResponse" title="libsolace.plugin.PluginResponse">PluginResponse</a></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="index.html#libsolace.plugin.PluginResponse" title="libsolace.plugin.PluginResponse">PluginResponse</a></p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">single SEMP request</p>
@@ -204,15 +204,12 @@
 <dt id="libsolace.items.SolaceACLProfile.SolaceACLProfile.allow_publish">
 <code class="descname">allow_publish</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libsolace/items/SolaceACLProfile.html#SolaceACLProfile.allow_publish"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libsolace.items.SolaceACLProfile.SolaceACLProfile.allow_publish" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allow publish</p>
-<dl class="docutils">
-<dt>Example:</dt>
-<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">api</span> <span class="o">=</span> <span class="n">SolaceAPI</span><span class="p">(</span><span class="s2">&quot;dev&quot;</span><span class="p">)</span>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">api</span> <span class="o">=</span> <span class="n">SolaceAPI</span><span class="p">(</span><span class="s2">&quot;dev&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">request</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">manage</span><span class="p">(</span><span class="s2">&quot;SolaceACLProfile&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">allow_publish</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;myprofile&quot;</span><span class="p">,</span> <span class="n">vpn_name</span><span class="o">=</span><span class="s2">&quot;dev_testvpn&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># response = api.rpc(request)</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -223,7 +220,7 @@
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="libsolace.plugin.html#libsolace.plugin.PluginResponse" title="libsolace.plugin.PluginResponse">PluginResponse</a></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="index.html#libsolace.plugin.PluginResponse" title="libsolace.plugin.PluginResponse">PluginResponse</a></p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">single SEMP request</p>
@@ -247,7 +244,7 @@
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="libsolace.plugin.html#libsolace.plugin.PluginResponse" title="libsolace.plugin.PluginResponse">PluginResponse</a></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="index.html#libsolace.plugin.PluginResponse" title="libsolace.plugin.PluginResponse">PluginResponse</a></p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">single SEMP request</p>
@@ -316,7 +313,7 @@
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="libsolace.plugin.html#libsolace.plugin.PluginResponse" title="libsolace.plugin.PluginResponse">PluginResponse</a></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="index.html#libsolace.plugin.PluginResponse" title="libsolace.plugin.PluginResponse">PluginResponse</a></p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">single SEMP request</p>

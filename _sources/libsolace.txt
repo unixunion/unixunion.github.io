@@ -140,11 +140,13 @@ And then finally run wither of the following depending on if you have a cluster 
 
 
 Single appliance:
+
 .. code-block:: none
 
     ./bin/solace-provision.py -e dev --no-detect-status -p SolaceTest --soltr_version="soltr/7_1_1"
 
 Cluster
+
 .. code-block:: none
 
     ./bin/solace-provision.py -e dev -p SolaceTest

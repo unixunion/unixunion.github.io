@@ -194,6 +194,7 @@
 <span class="sd">        :returns: list of requests that can be performed in a for loop.</span>
 
 <span class="sd">        Example:</span>
+
 <span class="sd">        &gt;&gt;&gt; connection = SolaceAPI(&quot;dev&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; self.users = [connection.manage(&quot;SolaceUser&quot;,</span>
 <span class="sd">                                client_username = &quot;%s_testuser&quot;,</span>
@@ -333,6 +334,7 @@
 <span class="sd">        Delete a client user</span>
 
 <span class="sd">        Example</span>
+
 <span class="sd">        &gt;&gt;&gt; connection = SolaceAPI(&quot;dev&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; connection.manage(&quot;SolaceUser&quot;).delete(client_username=&quot;foo&quot;, vpn_name=&quot;bar&quot;)</span>
 <span class="sd">        &lt;rpc semp-version=&quot;soltr/6_0&quot;&gt;&lt;create&gt;&lt;client-username&gt;&lt;username&gt;foo&lt;/username&gt;&lt;vpn-name&gt;bar&lt;/vpn-name&gt;</span>
@@ -422,6 +424,7 @@
 <span class="sd">        Create client-user</span>
 
 <span class="sd">        Example</span>
+
 <span class="sd">        &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; xml = api.manage(&quot;SolaceUser&quot;).create_user(client_username=&quot;foo&quot;, vpn_name=&quot;bar&quot;)</span>
 <span class="sd">        &lt;rpc semp-version=&quot;soltr/6_0&quot;&gt;&lt;create&gt;&lt;client-username&gt;&lt;username&gt;foo&lt;/username&gt;&lt;vpn-name&gt;bar&lt;/vpn-name&gt;</span>
@@ -450,6 +453,7 @@
 <span class="sd">        The kwarg shutdown_on_apply needs to be either True or &#39;u&#39; or &#39;b&#39; for this method to fire.</span>
 
 <span class="sd">        Example</span>
+
 <span class="sd">        &gt;&gt;&gt; connection.manage(&quot;SolaceUser&quot;).shutdown(client_username=&quot;foo&quot;, vpn_name=&quot;bar&quot;, shutdown_on_apply=True)</span>
 <span class="sd">        &lt;rpc semp-version=&quot;soltr/6_0&quot;&gt;&lt;client-username&gt;&lt;username&gt;foo&lt;/username&gt;&lt;vpn-name&gt;bar&lt;/vpn-name&gt;&lt;shutdown/&gt;</span>
 <span class="sd">        &lt;/client-username&gt;&lt;/rpc&gt;</span>
@@ -488,6 +492,7 @@
 <span class="sd">        Set the ClientProfile</span>
 
 <span class="sd">        Example</span>
+
 <span class="sd">        &gt;&gt;&gt; connection = SolaceAPI(&quot;dev&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; requests = []</span>
 <span class="sd">        &gt;&gt;&gt; requests.append(connection.manage(&quot;SolaceUser&quot;).shutdown(client_username=&quot;default&quot;, vpn_name=&quot;default&quot;, shutdown_on_apply=True))</span>
