@@ -145,15 +145,6 @@
             
   <div class="section" id="welcome-to-libsolace-s-documentation">
 <h1>Welcome to libsolace&#8217;s documentation!<a class="headerlink" href="#welcome-to-libsolace-s-documentation" title="Permalink to this headline">¶</a></h1>
-<div class="sidebar">
-<p class="first sidebar-title">Sidebar Title</p>
-<p class="sidebar-subtitle">Optional Subtitle</p>
-<p>This is a sidebar.  It is for text outside the flow of the main
-text.</p>
-<p class="rubric">This is a rubric inside a sidebar</p>
-<p class="last">Sidebars often appears beside the main text with a border and
-background color.</p>
-</div>
 <div class="toctree-wrapper compound">
 <ul class="simple">
 </ul>
@@ -163,8 +154,8 @@ design which provides the basic features required to manage pairs of Solace Appl
 <div class="section" id="basics">
 <h2>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><p>Managed objects within Solace are managed through <a class="reference internal" href="libsolace.plugin.html#libsolace.plugin.Plugin" title="libsolace.plugin.Plugin"><code class="xref py py-class docutils literal"><span class="pre">plugin.Plugin</span></code></a>. Plugins are used to create SEMP requests,
-which can then be posted to the appliance through a <a class="reference internal" href="libsolace.SolaceAPI.html#libsolace.SolaceAPI.SolaceAPI" title="libsolace.SolaceAPI.SolaceAPI"><code class="xref py py-class docutils literal"><span class="pre">SolaceAPI.SolaceAPI</span></code></a> instance.</p>
+<div><p>Managed objects within Solace are managed through <a class="reference internal" href="#libsolace.plugin.Plugin" title="libsolace.plugin.Plugin"><code class="xref py py-class docutils literal"><span class="pre">plugin.Plugin</span></code></a>. Plugins are used to create SEMP requests,
+which can then be posted to the appliance through a <a class="reference internal" href="#libsolace.SolaceAPI.SolaceAPI" title="libsolace.SolaceAPI.SolaceAPI"><code class="xref py py-class docutils literal"><span class="pre">SolaceAPI.SolaceAPI</span></code></a> instance.</p>
 <p>During the creation of SEMP requests, Plugins will enqueue the request in a instance of L{SolaceCommandQueue&lt;SolaceCommandQueue.SolaceCommandQueue&gt;}
 which will also validate the request against the appropriate XSD for the version of SolOS-TR the appliance is running.</p>
 </div></blockquote>
@@ -189,7 +180,7 @@ requests, and sending them to the appliance(s) through the rpc(str) method.</p>
 the the <em>primary</em> and <em>backup</em> node states. Typically you issue the same SEMP
 command to both appliances. Commands can also be issued to either the primary
 or the backup appliance utilizing the <cite>primaryOnly</cite> and <cite>backupOnly</cite> kwargs.
-see: <a class="reference internal" href="libsolace.SolaceAPI.html#libsolace.SolaceAPI.SolaceAPI.rpc" title="libsolace.SolaceAPI.SolaceAPI.rpc"><code class="xref py py-func docutils literal"><span class="pre">rpc()</span></code></a></p>
+see: <a class="reference internal" href="#libsolace.SolaceAPI.SolaceAPI.rpc" title="libsolace.SolaceAPI.SolaceAPI.rpc"><code class="xref py py-func docutils literal"><span class="pre">rpc()</span></code></a></p>
 <p>The version of the SolOS-TR OS is detected on automatically, and this behaviour
 can be overridden with the <cite>version</cite> kwarg. If using the VMR you will want to
 pass in both detect_status=False and version=&#8221;soltr/7_1_1&#8221;.</p>
@@ -208,7 +199,7 @@ in the libsolace.yaml file.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="libsolace.SolaceAPI.html#libsolace.SolaceAPI.SolaceAPI" title="libsolace.SolaceAPI.SolaceAPI">SolaceAPI.SolaceAPI</a></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#libsolace.SolaceAPI.SolaceAPI" title="libsolace.SolaceAPI.SolaceAPI">SolaceAPI.SolaceAPI</a></p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">instance</p>
