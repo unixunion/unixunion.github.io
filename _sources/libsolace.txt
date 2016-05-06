@@ -182,3 +182,11 @@ Submodules
    libsolace.util
    libsolace.xml2dict
 
+Documentation
+-------------
+
+Documentation is sphinx based, so you need to install all the basics for sphinx including the rtd theme.
+
+Doctest is run with `make doctest`
+
+Documentation html is rendered with `make html`

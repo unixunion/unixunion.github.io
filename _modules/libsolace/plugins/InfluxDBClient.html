@@ -163,27 +163,40 @@
 <span class="kn">from</span> <span class="nn">libsolace.plugin</span> <span class="kn">import</span> <span class="n">Plugin</span>
 <span class="kn">from</span> <span class="nn">libsolace.util</span> <span class="kn">import</span> <span class="n">get_key_from_settings</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Simple influxdb client that can send metrics to influx.</span>
 
-<span class="sd">e.g.</span>
-<span class="sd">PLUGINS:</span>
-<span class="sd">    ...</span>
-<span class="sd">    - libsolace.plugins.InfluxDBClient</span>
-<span class="sd">    ...</span>
+<span class="s2">.. code-block:: none</span>
 
-<span class="sd">INFLUXDB_HOST: localhost</span>
-<span class="sd">INFLUXDB_PORT: 8086</span>
-<span class="sd">INFLUXDB_USER: user</span>
-<span class="sd">INFLUXDB_PASS: pass</span>
-<span class="sd">INFLUXDB_DB: solace</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="s2">    PLUGINS:</span>
+<span class="s2">        ...</span>
+<span class="s2">        - libsolace.plugins.InfluxDBClient</span>
+<span class="s2">        ...</span>
+
+<span class="s2">    INFLUXDB_HOST: localhost</span>
+<span class="s2">    INFLUXDB_PORT: 8086</span>
+<span class="s2">    INFLUXDB_USER: user</span>
+<span class="s2">    INFLUXDB_PASS: pass</span>
+<span class="s2">    INFLUXDB_DB: solace</span>
+
+<span class="s2">&quot;&quot;&quot;</span>
 
 
 <div class="viewcode-block" id="get_time"><a class="viewcode-back" href="../../../libsolace.plugins.InfluxDBClient.html#libsolace.plugins.InfluxDBClient.get_time">[docs]</a><span class="k">def</span> <span class="nf">get_time</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; consistent time formatting</span>
+
+<span class="sd">    :return: time</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%SZ&quot;</span><span class="p">,</span> <span class="n">gmtime</span><span class="p">())</span></div>
 
 
 <div class="viewcode-block" id="flatten_json"><a class="viewcode-back" href="../../../libsolace.plugins.InfluxDBClient.html#libsolace.plugins.InfluxDBClient.flatten_json">[docs]</a><span class="k">def</span> <span class="nf">flatten_json</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    flattens a json object combining key names to be {parent-child-leaf: value}</span>
+
+<span class="sd">    :param y:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
@@ -203,11 +216,17 @@
 <span class="nd">@libsolace.plugin_registry.register</span>
 <div class="viewcode-block" id="InfluxDBClient"><a class="viewcode-back" href="../../../libsolace.plugins.InfluxDBClient.html#libsolace.plugins.InfluxDBClient.InfluxDBClient">[docs]</a><span class="k">class</span> <span class="nc">InfluxDBClient</span><span class="p">(</span><span class="n">Plugin</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simple influxdb client plugin for libsolace</span>
 
-<span class="sd">    import libsolace.settingsloader as settings</span>
-<span class="sd">    import libsolace</span>
-<span class="sd">    metrics_class = libsolace.plugin_registry(&#39;InfluxDBClient&#39;, settings=settings)</span>
-<span class="sd">    metrics = metrics_class(settings=settings)</span>
+<span class="sd">    Example:</span>
+
+<span class="sd">    .. doctest::</span>
+<span class="sd">        :options: +SKIP</span>
+
+<span class="sd">        &gt;&gt;&gt; import libsolace.settingsloader as settings</span>
+<span class="sd">        &gt;&gt;&gt; import libsolace</span>
+<span class="sd">        &gt;&gt;&gt; metrics_class = libsolace.plugin_registry(&#39;InfluxDBClient&#39;, settings=settings)</span>
+<span class="sd">        &gt;&gt;&gt; metrics = metrics_class(settings=settings)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">plugin_name</span> <span class="o">=</span> <span class="s2">&quot;InfluxDBClient&quot;</span>
@@ -228,15 +247,21 @@
                                      <span class="bp">self</span><span class="o">.</span><span class="n">influxdb_pass</span><span class="p">,</span>
                                      <span class="bp">self</span><span class="o">.</span><span class="n">influxdb_db</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">measurement</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">tags</span><span class="p">):</span>
+<div class="viewcode-block" id="InfluxDBClient.send"><a class="viewcode-back" href="../../../libsolace.plugins.InfluxDBClient.html#libsolace.plugins.InfluxDBClient.InfluxDBClient.send">[docs]</a>    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">measurement</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">tags</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        import libsolace.settingsloader as settings</span>
-<span class="sd">        import libsolace</span>
-<span class="sd">        metrics_class = libsolace.plugin_registry(&#39;InfluxDBClient&#39;, settings=settings)</span>
-<span class="sd">        metrics = metrics_class(settings=settings)</span>
+<span class="sd">        Sends the metrics to influxdb.</span>
 
-<span class="sd">        metrics.send(&#39;http-metrics&#39;, {&quot;key&quot;: 10, &quot;key2&quot;: 12}, environment=&#39;prod&#39;, host=&#39;foo&#39;)</span>
-<span class="sd">        metrics.send(&quot;test&quot;, {&quot;key&quot;: 2}, host=&quot;test&quot;)</span>
+<span class="sd">        Examples:</span>
+
+<span class="sd">        .. doctest::</span>
+<span class="sd">            :options: +SKIP</span>
+
+<span class="sd">            &gt;&gt;&gt; import libsolace.settingsloader as settings</span>
+<span class="sd">            &gt;&gt;&gt; import libsolace</span>
+<span class="sd">            &gt;&gt;&gt; metrics_class = libsolace.plugin_registry(&#39;InfluxDBClient&#39;, settings=settings)</span>
+<span class="sd">            &gt;&gt;&gt; metrics = metrics_class(settings=settings)</span>
+<span class="sd">            &gt;&gt;&gt; metrics.send(&#39;http-metrics&#39;, {&quot;key&quot;: 10, &quot;key2&quot;: 12}, environment=&#39;prod&#39;, host=&#39;foo&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; metrics.send(&quot;test&quot;, {&quot;key&quot;: 2}, host=&quot;test&quot;)</span>
 
 <span class="sd">        :param data: a json object of keys and values. will be flattened!</span>
 <span class="sd">        :param measurement:</span>
@@ -256,7 +281,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">write_points</span><span class="p">(</span><span class="n">json_body</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Unable to write to influxdb&quot;</span><span class="p">)</span></div>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Unable to write to influxdb&quot;</span><span class="p">)</span></div></div>
 </pre></div>
 
            </div>

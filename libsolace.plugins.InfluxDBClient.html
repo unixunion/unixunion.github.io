@@ -163,25 +163,108 @@
             
   <div class="section" id="module-libsolace.plugins.InfluxDBClient">
 <span id="libsolace-plugins-influxdbclient-module"></span><h1>libsolace.plugins.InfluxDBClient module<a class="headerlink" href="#module-libsolace.plugins.InfluxDBClient" title="Permalink to this headline">¶</a></h1>
-<p>a plugin for sending metrics to InfluxDB</p>
+<p>Simple influxdb client that can send metrics to influx.</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>PLUGINS:
+    ...
+    - libsolace.plugins.InfluxDBClient
+    ...
+
+INFLUXDB_HOST: localhost
+INFLUXDB_PORT: 8086
+INFLUXDB_USER: user
+INFLUXDB_PASS: pass
+INFLUXDB_DB: solace
+</pre></div>
+</div>
 <dl class="function">
 <dt id="libsolace.plugins.InfluxDBClient.InfluxDBClient">
 <code class="descclassname">libsolace.plugins.InfluxDBClient.</code><code class="descname">InfluxDBClient</code><span class="sig-paren">(</span><em>fn</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libsolace/plugins/InfluxDBClient.html#InfluxDBClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libsolace.plugins.InfluxDBClient.InfluxDBClient" title="Permalink to this definition">¶</a></dt>
-<dd><p>import libsolace.settingsloader as settings
-import libsolace
-metrics_class = libsolace.plugin_registry(&#8216;InfluxDBClient&#8217;, settings=settings)
-metrics = metrics_class(settings=settings)</p>
+<dd><p>Simple influxdb client plugin for libsolace</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">libsolace.settingsloader</span> <span class="k">as</span> <span class="nn">settings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">libsolace</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics_class</span> <span class="o">=</span> <span class="n">libsolace</span><span class="o">.</span><span class="n">plugin_registry</span><span class="p">(</span><span class="s1">&#39;InfluxDBClient&#39;</span><span class="p">,</span> <span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span> <span class="o">=</span> <span class="n">metrics_class</span><span class="p">(</span><span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="libsolace.plugins.InfluxDBClient.flatten_json">
 <code class="descclassname">libsolace.plugins.InfluxDBClient.</code><code class="descname">flatten_json</code><span class="sig-paren">(</span><em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libsolace/plugins/InfluxDBClient.html#flatten_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libsolace.plugins.InfluxDBClient.flatten_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>flattens a json object combining key names to be {parent-child-leaf: value}</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>y</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="libsolace.plugins.InfluxDBClient.get_time">
 <code class="descclassname">libsolace.plugins.InfluxDBClient.</code><code class="descname">get_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/libsolace/plugins/InfluxDBClient.html#get_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libsolace.plugins.InfluxDBClient.get_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>consistent time formatting</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">time</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">libsolace.plugins.InfluxDBClient.</code><code class="descname">InfluxDBClient</code><a class="reference internal" href="_modules/libsolace/plugins/InfluxDBClient.html#InfluxDBClient"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Simple influxdb client plugin for libsolace</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">libsolace.settingsloader</span> <span class="k">as</span> <span class="nn">settings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">libsolace</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics_class</span> <span class="o">=</span> <span class="n">libsolace</span><span class="o">.</span><span class="n">plugin_registry</span><span class="p">(</span><span class="s1">&#39;InfluxDBClient&#39;</span><span class="p">,</span> <span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span> <span class="o">=</span> <span class="n">metrics_class</span><span class="p">(</span><span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="libsolace.plugins.InfluxDBClient.InfluxDBClient.plugin_name">
+<code class="descname">plugin_name</code><em class="property"> = 'InfluxDBClient'</em><a class="headerlink" href="#libsolace.plugins.InfluxDBClient.InfluxDBClient.plugin_name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="libsolace.plugins.InfluxDBClient.InfluxDBClient.send">
+<code class="descname">send</code><span class="sig-paren">(</span><em>measurement</em>, <em>data</em>, <em>**tags</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libsolace/plugins/InfluxDBClient.html#InfluxDBClient.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libsolace.plugins.InfluxDBClient.InfluxDBClient.send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends the metrics to influxdb.</p>
+<p>Examples:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">libsolace.settingsloader</span> <span class="k">as</span> <span class="nn">settings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">libsolace</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics_class</span> <span class="o">=</span> <span class="n">libsolace</span><span class="o">.</span><span class="n">plugin_registry</span><span class="p">(</span><span class="s1">&#39;InfluxDBClient&#39;</span><span class="p">,</span> <span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span> <span class="o">=</span> <span class="n">metrics_class</span><span class="p">(</span><span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;http-metrics&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;key2&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">},</span> <span class="n">environment</span><span class="o">=</span><span class="s1">&#39;prod&#39;</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="n">host</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> &#8211; a json object of keys and values. will be flattened!</li>
+<li><strong>measurement</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
 
 </div>
 

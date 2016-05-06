@@ -182,14 +182,14 @@
 <span class="sd">        &gt;&gt;&gt; clazz = libsolace.plugin_registry(&quot;SolaceVPN&quot;, settings=settings)</span>
 <span class="sd">        &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; solaceVpnPlugin = clazz(settings=settings, api=api)</span>
-<span class="sd">        &gt;&gt;&gt; solaceVpnPlugin.get(vpn_name=&quot;default&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; list_of_dicts = solaceVpnPlugin.get(vpn_name=&quot;default&quot;)</span>
 
 <span class="sd">    Provision/Batch Mode Example via SolaceAPI</span>
 
 <span class="sd">        &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; vpn = api.manage(&quot;SolaceVPN&quot;, vpn_name=&quot;my_vpn&quot;, owner_name=&quot;someuser&quot;, acl_profile=&quot;default&quot;, max_spool_usage=1024)</span>
-<span class="sd">        &gt;&gt;&gt; for req in vpn.commands.commands:</span>
-<span class="sd">        &gt;&gt;&gt;    api.rpc(str(req[0]), **req[1])</span>
+<span class="sd">        &gt;&gt;&gt; #for req in vpn.commands.commands:</span>
+<span class="sd">        &gt;&gt;&gt; #   api.rpc(str(req[0]), **req[1])</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -259,14 +259,14 @@
 
 <span class="sd">            &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; tuple_request = api.manage(&quot;SolaceVPN&quot;).create_vpn(vpn_name=&quot;my_vpn&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; api.rpc(tuple_request)</span>
+<span class="sd">            &gt;&gt;&gt; response = api.rpc(tuple_request)</span>
 
 
 <span class="sd">        Example2:</span>
 
 
 <span class="sd">            &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; api.rpc(api.manage(&quot;SolaceVPN&quot;).create_vpn(vpn_name=&quot;my_vpn&quot;))</span>
+<span class="sd">            &gt;&gt;&gt; response = api.rpc(api.manage(&quot;SolaceVPN&quot;).create_vpn(vpn_name=&quot;my_vpn&quot;))</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -320,13 +320,13 @@
 
 <span class="sd">        &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; tuple_request = api.manage(&quot;SolaceVPN&quot;).clear_radius(vpn_name=&quot;my_vpn&quot;)</span>
-<span class="sd">    &gt;&gt;&gt; api.rpc(tuple_request)</span>
+<span class="sd">        &gt;&gt;&gt; response = api.rpc(tuple_request)</span>
 
 
 <span class="sd">    Example 2:</span>
 
 <span class="sd">        &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; api.rpc(api.manage(&quot;SolaceVPN&quot;).clear_radius(vpn_name=&quot;my_vpn&quot;))</span>
+<span class="sd">        &gt;&gt;&gt; response = api.rpc(api.manage(&quot;SolaceVPN&quot;).clear_radius(vpn_name=&quot;my_vpn&quot;))</span>
 
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -356,7 +356,7 @@
 
 <span class="sd">            &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; tuple_request = api.manage(&quot;SolaceVPN&quot;).set_internal_auth(vpn_name=&quot;my_vpn&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; api.rpc(tuple_request)</span>
+<span class="sd">            &gt;&gt;&gt; response = api.rpc(tuple_request)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -390,7 +390,7 @@
 
 <span class="sd">            &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; request_tuple = api.manage(&quot;SolaceVPN&quot;).set_spool_size(vpn_name=&quot;my_vpn&quot;, max_spool_usage=4096)</span>
-<span class="sd">            &gt;&gt;&gt; api.rpc(request_tuple)</span>
+<span class="sd">            &gt;&gt;&gt; response = api.rpc(request_tuple)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -420,7 +420,7 @@
 
 <span class="sd">            &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; request_tuple = api.manage(&quot;SolaceVPN&quot;).set_large_message_threshold(vpn_name=&quot;my_vpn&quot;, large_message_threshold=4096)</span>
-<span class="sd">            &gt;&gt;&gt; api.rpc(request_tuple)</span>
+<span class="sd">            &gt;&gt;&gt; response = api.rpc(request_tuple)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -451,7 +451,7 @@
 
 <span class="sd">            &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; request_tuple = api.manage(&quot;SolaceVPN&quot;).set_logging_tag(vpn_name=&quot;my_vpn&quot;, tag=&quot;my_vpn_string&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; api.rpc(request_tuple)</span>
+<span class="sd">            &gt;&gt;&gt; response = api.rpc(request_tuple)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -478,7 +478,7 @@
 
 <span class="sd">            &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; request_tuple = api.manage(&quot;SolaceVPN&quot;).enable_vpn(vpn_name=&quot;my_vpn&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; api.rpc(request_tuple)</span>
+<span class="sd">            &gt;&gt;&gt; response = api.rpc(request_tuple)</span>
 
 
 <span class="sd">        &quot;&quot;&quot;</span>

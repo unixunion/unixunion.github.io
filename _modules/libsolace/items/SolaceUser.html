@@ -336,9 +336,8 @@
 <span class="sd">        Example</span>
 
 <span class="sd">        &gt;&gt;&gt; connection = SolaceAPI(&quot;dev&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; connection.manage(&quot;SolaceUser&quot;).delete(client_username=&quot;foo&quot;, vpn_name=&quot;bar&quot;)</span>
-<span class="sd">        &lt;rpc semp-version=&quot;soltr/6_0&quot;&gt;&lt;create&gt;&lt;client-username&gt;&lt;username&gt;foo&lt;/username&gt;&lt;vpn-name&gt;bar&lt;/vpn-name&gt;</span>
-<span class="sd">        &lt;/client-username&gt;&lt;/create&gt;&lt;/rpc&gt;</span>
+<span class="sd">        &gt;&gt;&gt; connection.manage(&quot;SolaceUser&quot;).delete(client_username=&quot;foo&quot;, vpn_name=&quot;bar&quot;, force=True, skip_before=True).xml</span>
+<span class="sd">        &#39;&lt;rpc semp-version=&quot;soltr/7_1_1&quot;&gt;&lt;no&gt;&lt;client-username&gt;&lt;username&gt;foo&lt;/username&gt;&lt;vpn-name&gt;bar&lt;/vpn-name&gt;&lt;/client-username&gt;&lt;/no&gt;&lt;/rpc&gt;&#39;</span>
 
 <span class="sd">        :param client_username: the username</span>
 <span class="sd">        :type client_username: str</span>
@@ -426,9 +425,9 @@
 <span class="sd">        Example</span>
 
 <span class="sd">        &gt;&gt;&gt; api = SolaceAPI(&quot;dev&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; xml = api.manage(&quot;SolaceUser&quot;).create_user(client_username=&quot;foo&quot;, vpn_name=&quot;bar&quot;)</span>
-<span class="sd">        &lt;rpc semp-version=&quot;soltr/6_0&quot;&gt;&lt;create&gt;&lt;client-username&gt;&lt;username&gt;foo&lt;/username&gt;&lt;vpn-name&gt;bar&lt;/vpn-name&gt;</span>
-<span class="sd">        &lt;/client-username&gt;&lt;/create&gt;&lt;/rpc&gt;</span>
+<span class="sd">        &gt;&gt;&gt; xml = api.manage(&quot;SolaceUser&quot;).create_user(client_username=&quot;foo&quot;, vpn_name=&quot;bar&quot;, force=True)</span>
+<span class="sd">        &gt;&gt;&gt; xml.xml</span>
+<span class="sd">        &#39;&lt;rpc semp-version=&quot;soltr/7_1_1&quot;&gt;&lt;create&gt;&lt;client-username&gt;&lt;username&gt;foo&lt;/username&gt;&lt;vpn-name&gt;bar&lt;/vpn-name&gt;&lt;/client-username&gt;&lt;/create&gt;&lt;/rpc&gt;&#39;</span>
 
 <span class="sd">        :param client_username: the username</span>
 <span class="sd">        :type client_username: str</span>
@@ -454,9 +453,8 @@
 
 <span class="sd">        Example</span>
 
-<span class="sd">        &gt;&gt;&gt; connection.manage(&quot;SolaceUser&quot;).shutdown(client_username=&quot;foo&quot;, vpn_name=&quot;bar&quot;, shutdown_on_apply=True)</span>
-<span class="sd">        &lt;rpc semp-version=&quot;soltr/6_0&quot;&gt;&lt;client-username&gt;&lt;username&gt;foo&lt;/username&gt;&lt;vpn-name&gt;bar&lt;/vpn-name&gt;&lt;shutdown/&gt;</span>
-<span class="sd">        &lt;/client-username&gt;&lt;/rpc&gt;</span>
+<span class="sd">        &gt;&gt;&gt; connection.manage(&quot;SolaceUser&quot;).shutdown(client_username=&quot;foo&quot;, vpn_name=&quot;bar&quot;, shutdown_on_apply=True).xml</span>
+<span class="sd">        &#39;&lt;rpc semp-version=&quot;soltr/7_1_1&quot;&gt;&lt;client-username&gt;&lt;username&gt;foo&lt;/username&gt;&lt;vpn-name&gt;bar&lt;/vpn-name&gt;&lt;shutdown/&gt;&lt;/client-username&gt;&lt;/rpc&gt;&#39;</span>
 
 <span class="sd">        :param client_username: the username</span>
 <span class="sd">        :type client_username: str</span>

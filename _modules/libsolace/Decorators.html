@@ -227,7 +227,7 @@
     <span class="k">return</span> <span class="n">wrap</span></div>
 
 
-<div class="viewcode-block" id="only_on_shutdown"><a class="viewcode-back" href="../../libsolace.Decorators.html#libsolace.Decorators.only_on_shutdown">[docs]</a><span class="k">def</span> <span class="nf">only_on_shutdown</span><span class="p">(</span><span class="n">entity</span><span class="p">):</span>
+<div class="viewcode-block" id="only_on_shutdown"><a class="viewcode-back" href="../../libsolace.Decorators.html#libsolace.Decorators.only_on_shutdown">[docs]</a><span class="k">def</span> <span class="nf">only_on_shutdown</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Only calls the method if the shutdown_on_apply rules apply to the `entity` type. The entity can be either `queue` or</span>
 <span class="sd">    `user`.</span>
@@ -288,7 +288,7 @@
     <span class="k">return</span> <span class="n">wrap</span></div>
 
 
-<div class="viewcode-block" id="only_if_not_exists"><a class="viewcode-back" href="../../libsolace.Decorators.html#libsolace.Decorators.only_if_not_exists">[docs]</a><span class="k">def</span> <span class="nf">only_if_not_exists</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">data_path</span><span class="p">,</span> <span class="n">primaryOnly</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">backupOnly</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="only_if_not_exists"><a class="viewcode-back" href="../../libsolace.Decorators.html#libsolace.Decorators.only_if_not_exists">[docs]</a><span class="k">def</span> <span class="nf">only_if_not_exists</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">data_path</span><span class="p">,</span> <span class="n">primaryOnly</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">backupOnly</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Call the method only if the Solace object does NOT exist in the Solace appliance.</span>
 
@@ -338,6 +338,14 @@
 
             <span class="c1"># extract package name</span>
             <span class="n">module</span> <span class="o">=</span> <span class="n">get_calling_module</span><span class="p">()</span>
+
+            <span class="c1"># force kwarg, just return the method to allow exec</span>
+            <span class="k">if</span> <span class="s2">&quot;force&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">and</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;force&#39;</span><span class="p">):</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Force being used, returning obj&quot;</span><span class="p">)</span>
+                <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_exists</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Not forcing return of object&quot;</span><span class="p">)</span>
 
             <span class="c1"># determine if were checking both or a single node</span>
             <span class="k">if</span> <span class="n">primaryOnly</span><span class="p">:</span>

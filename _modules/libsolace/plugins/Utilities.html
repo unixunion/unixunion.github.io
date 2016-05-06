@@ -176,13 +176,15 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">SOLACE_QUEUE_PLUGIN</span> <span class="o">=</span> <span class="n">get_key_from_settings</span><span class="p">(</span><span class="s2">&quot;SOLACE_QUEUE_PLUGIN&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SOLACE_USER_PLUGIN</span> <span class="o">=</span> <span class="n">get_key_from_settings</span><span class="p">(</span><span class="s2">&quot;SOLACE_USER_PLUGIN&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">get_user_queues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client_username</span><span class="p">,</span> <span class="n">vpn_name</span><span class="p">):</span>
+<div class="viewcode-block" id="Utilities.get_user_queues"><a class="viewcode-back" href="../../../libsolace.plugins.Utilities.html#libsolace.plugins.Utilities.Utilities.get_user_queues">[docs]</a>    <span class="k">def</span> <span class="nf">get_user_queues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client_username</span><span class="p">,</span> <span class="n">vpn_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get all queues and return filtered list of only queues who&#39;s owner matches the username</span>
 
 <span class="sd">        Example:</span>
+
 <span class="sd">            &gt;&gt;&gt; connection = SolaceAPI(&quot;dev&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; results = get_plugin(&quot;Utilities&quot;, connection).get_user_queues(&quot;dev_testproductA&quot;, &quot;dev_testvpn&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; results = connection.manage(&quot;Utilities&quot;).get_user_queues(&quot;dev_testproductA&quot;, &quot;dev_testvpn&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; results</span>
 <span class="sd">            [u&#39;testqueue1&#39;]</span>
 
 <span class="sd">        :param username: username to filter on</span>
@@ -193,7 +195,7 @@
         <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">manage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SOLACE_QUEUE_PLUGIN</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">queue_name</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">vpn_name</span><span class="o">=</span><span class="n">vpn_name</span><span class="p">,</span>
-                                                                 <span class="n">detail</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">reply</span><span class="o">.</span><span class="n">show</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">queues</span><span class="o">.</span><span class="n">queue</span>
+                                                                 <span class="n">detail</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;rpc-reply&#39;</span><span class="p">][</span><span class="s1">&#39;rpc&#39;</span><span class="p">][</span><span class="s1">&#39;show&#39;</span><span class="p">][</span><span class="s1">&#39;queue&#39;</span><span class="p">][</span><span class="s1">&#39;queues&#39;</span><span class="p">][</span><span class="s1">&#39;queue&#39;</span><span class="p">]</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
@@ -208,35 +210,50 @@
                     <span class="s2">&quot; </span><span class="si">%s</span><span class="s2">. Exception message: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span>
                         <span class="n">vpn_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">result</span>
+            <span class="k">return</span> <span class="n">result</span></div>
 
-    <span class="k">def</span> <span class="nf">is_client_user_inuse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client_username</span><span class="p">,</span> <span class="n">vpn_name</span><span class="p">):</span>
+<div class="viewcode-block" id="Utilities.is_client_user_inuse"><a class="viewcode-back" href="../../../libsolace.plugins.Utilities.html#libsolace.plugins.Utilities.Utilities.is_client_user_inuse">[docs]</a>    <span class="k">def</span> <span class="nf">is_client_user_inuse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client_username</span><span class="p">,</span> <span class="n">vpn_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns boolean if client username has client connections</span>
+<span class="sd">        Returns boolean if client username has client</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; connection = SolaceAPI(&quot;dev&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; results = connection.manage(&quot;Utilities&quot;).is_client_user_inuse(&quot;dev_testproductA&quot;, &quot;dev_testvpn&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; results</span>
+<span class="sd">            True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">manage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SOLACE_USER_PLUGIN</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">client_username</span><span class="o">=</span><span class="n">client_username</span><span class="p">,</span> <span class="n">vpn_name</span><span class="o">=</span><span class="n">vpn_name</span><span class="p">,</span>
-                                                                <span class="n">detail</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">reply</span><span class="o">.</span><span class="n">show</span><span class="o">.</span><span class="n">client_username</span><span class="o">.</span><span class="n">client_usernames</span><span class="o">.</span><span class="n">client_username</span><span class="o">.</span><span class="n">num_clients</span>
-        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;User </span><span class="si">%s</span><span class="s2"> is in-use, </span><span class="si">%s</span><span class="s2"> sessions open&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">client_username</span><span class="p">,</span> <span class="n">response</span><span class="p">))</span>
-            <span class="k">return</span> <span class="bp">True</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;User </span><span class="si">%s</span><span class="s2"> is NOT in-use, </span><span class="si">%s</span><span class="s2"> sessions open&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">client_username</span><span class="p">,</span> <span class="n">response</span><span class="p">))</span>
-            <span class="k">return</span> <span class="bp">False</span>
-
-    <span class="k">def</span> <span class="nf">is_client_user_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client_username</span><span class="p">,</span> <span class="n">vpn_name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns boolean if client username has client connections</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">manage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SOLACE_USER_PLUGIN</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">client_username</span><span class="o">=</span><span class="n">client_username</span><span class="p">,</span> <span class="n">vpn_name</span><span class="o">=</span><span class="n">vpn_name</span><span class="p">,</span>
-                                                                <span class="n">detail</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">reply</span><span class="o">.</span><span class="n">show</span><span class="o">.</span><span class="n">client_username</span><span class="o">.</span><span class="n">client_usernames</span><span class="o">.</span><span class="n">client_username</span><span class="o">.</span><span class="n">num_clients</span>
+                                                                <span class="n">detail</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;rpc-reply&#39;</span><span class="p">][</span><span class="s1">&#39;rpc&#39;</span><span class="p">][</span><span class="s1">&#39;show&#39;</span><span class="p">][</span><span class="s1">&#39;client-username&#39;</span><span class="p">][</span><span class="s1">&#39;client-usernames&#39;</span><span class="p">][</span><span class="s1">&#39;client-username&#39;</span><span class="p">][</span><span class="s1">&#39;num-clients&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;User </span><span class="si">%s</span><span class="s2"> is in-use, </span><span class="si">%s</span><span class="s2"> sessions open&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">client_username</span><span class="p">,</span> <span class="n">response</span><span class="p">))</span>
             <span class="k">return</span> <span class="bp">True</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;User </span><span class="si">%s</span><span class="s2"> is NOT in-use, </span><span class="si">%s</span><span class="s2"> sessions open&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">client_username</span><span class="p">,</span> <span class="n">response</span><span class="p">))</span>
             <span class="k">return</span> <span class="bp">False</span></div>
+
+<div class="viewcode-block" id="Utilities.is_client_user_enabled"><a class="viewcode-back" href="../../../libsolace.plugins.Utilities.html#libsolace.plugins.Utilities.Utilities.is_client_user_enabled">[docs]</a>    <span class="k">def</span> <span class="nf">is_client_user_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client_username</span><span class="p">,</span> <span class="n">vpn_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns boolean if client username has client connections</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; connection = SolaceAPI(&quot;dev&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; t = connection.rpc(connection.manage(&quot;SolaceUser&quot;).no_shutdown(client_username=&quot;dev_testproductA&quot;, vpn_name=&quot;dev_testvpn&quot;, force=True))</span>
+<span class="sd">            &gt;&gt;&gt; results = connection.manage(&quot;Utilities&quot;).is_client_user_enabled(&quot;dev_testproductA&quot;, &quot;dev_testvpn&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; results</span>
+<span class="sd">            True</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">manage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SOLACE_USER_PLUGIN</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">client_username</span><span class="o">=</span><span class="n">client_username</span><span class="p">,</span> <span class="n">vpn_name</span><span class="o">=</span><span class="n">vpn_name</span><span class="p">,</span>
+                                                                <span class="n">detail</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;rpc-reply&#39;</span><span class="p">][</span><span class="s1">&#39;rpc&#39;</span><span class="p">][</span><span class="s1">&#39;show&#39;</span><span class="p">][</span><span class="s1">&#39;client-username&#39;</span><span class="p">][</span><span class="s1">&#39;client-usernames&#39;</span><span class="p">][</span><span class="s1">&#39;client-username&#39;</span><span class="p">][</span><span class="s1">&#39;num-clients&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;User </span><span class="si">%s</span><span class="s2"> is in-use, </span><span class="si">%s</span><span class="s2"> sessions open&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">client_username</span><span class="p">,</span> <span class="n">response</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;User </span><span class="si">%s</span><span class="s2"> is NOT in-use, </span><span class="si">%s</span><span class="s2"> sessions open&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">client_username</span><span class="p">,</span> <span class="n">response</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">False</span></div></div>
 </pre></div>
 
            </div>

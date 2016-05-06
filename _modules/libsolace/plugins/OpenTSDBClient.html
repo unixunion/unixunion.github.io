@@ -163,27 +163,37 @@
 <span class="kn">from</span> <span class="nn">libsolace.util</span> <span class="kn">import</span> <span class="n">get_key_from_settings</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Simple opentsdb plugin</span>
 
-<span class="sd">e.g.</span>
-<span class="sd">PLUGINS:</span>
-<span class="sd">    ...</span>
-<span class="sd">    - libsolace.plugins.OpenTSDBClient</span>
-<span class="sd">    ...</span>
+<span class="sd">.. code-block:: none</span>
 
-<span class="sd">TSDB_HOST: localhost</span>
-<span class="sd">TSDB_PORT: 4242</span>
-<span class="sd">TSDB_QSIZE: 1000</span>
-<span class="sd">TSDB_MPS: 100</span>
+<span class="sd">    PLUGINS:</span>
+<span class="sd">        ...</span>
+<span class="sd">        - libsolace.plugins.OpenTSDBClient</span>
+<span class="sd">        ...</span>
+
+<span class="sd">    TSDB_HOST: localhost</span>
+<span class="sd">    TSDB_PORT: 4242</span>
+<span class="sd">    TSDB_QSIZE: 1000</span>
+<span class="sd">    TSDB_MPS: 100</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 
 
 <span class="nd">@libsolace.plugin_registry.register</span>
 <div class="viewcode-block" id="OpenTSDBClient"><a class="viewcode-back" href="../../../libsolace.plugins.OpenTSDBClient.html#libsolace.plugins.OpenTSDBClient.OpenTSDBClient">[docs]</a><span class="k">class</span> <span class="nc">OpenTSDBClient</span><span class="p">(</span><span class="n">Plugin</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    import libsolace.settingsloader as settings</span>
-<span class="sd">    import libsolace</span>
-<span class="sd">    metrics_class = libsolace.plugin_registry(&#39;OpenTSDBClient&#39;, settings=settings)</span>
-<span class="sd">    metrics = metrics_class(settings=settings)</span>
+<span class="sd">    Similar to the influxdb client, but for opentsdb.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    .. doctest::</span>
+<span class="sd">        :options: +SKIP</span>
+
+<span class="sd">            &gt;&gt;&gt; import libsolace.settingsloader as settings</span>
+<span class="sd">            &gt;&gt;&gt; import libsolace</span>
+<span class="sd">            &gt;&gt;&gt; metrics_class = libsolace.plugin_registry(&#39;OpenTSDBClient&#39;, settings=settings)</span>
+<span class="sd">            &gt;&gt;&gt; metrics = metrics_class(settings=settings)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">plugin_name</span> <span class="o">=</span> <span class="s2">&quot;OpenTSDBClient&quot;</span>
@@ -202,14 +212,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">potsdb</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">,</span> <span class="n">qsize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">qsize</span><span class="p">,</span> <span class="n">host_tag</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">host_tag</span><span class="p">,</span>
                                     <span class="n">mps</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mps</span><span class="p">,</span> <span class="n">check_host</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">check_host</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">measurement</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">tags</span><span class="p">):</span>
+<div class="viewcode-block" id="OpenTSDBClient.send"><a class="viewcode-back" href="../../../libsolace.plugins.OpenTSDBClient.html#libsolace.plugins.OpenTSDBClient.OpenTSDBClient.send">[docs]</a>    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">measurement</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">tags</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send the metrics to opentsdb</span>
 
-<span class="sd">        import libsolace.settingsloader as settings</span>
-<span class="sd">        import libsolace</span>
-<span class="sd">        metrics_class = libsolace.plugin_registry(&#39;OpenTSDBClient&#39;, settings=settings)</span>
-<span class="sd">        metrics = metrics_class(settings=settings)</span>
-<span class="sd">        metrics.send(&#39;somekey&#39;, 100, extratag1=&#39;tagvalue&#39;, extratag2=&#39;tagvalue&#39;)</span>
+<span class="sd">        Example:</span>
+
+<span class="sd">        .. doctest::</span>
+<span class="sd">            :options: +SKIP</span>
+
+<span class="sd">            &gt;&gt;&gt; import libsolace.settingsloader as settings</span>
+<span class="sd">            &gt;&gt;&gt; import libsolace</span>
+<span class="sd">            &gt;&gt;&gt; metrics_class = libsolace.plugin_registry(&#39;OpenTSDBClient&#39;, settings=settings)</span>
+<span class="sd">            &gt;&gt;&gt; metrics = metrics_class(settings=settings)</span>
+<span class="sd">            &gt;&gt;&gt; metrics.send(&#39;somekey&#39;, 100, extratag1=&#39;tagvalue&#39;, extratag2=&#39;tagvalue&#39;)</span>
 
 <span class="sd">        :param measurement: the key name</span>
 <span class="sd">        :param data: the value</span>
@@ -220,7 +236,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">measurement</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">tags</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">ex</span><span class="p">:</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">ex</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Unable to send metrics&quot;</span><span class="p">)</span></div>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Unable to send metrics&quot;</span><span class="p">)</span></div></div>
 </pre></div>
 
            </div>
