@@ -27,6 +27,8 @@ and then run:
     python setup.py install
 
 
+.. _quickstart:
+
 Provisioning Quickstart
 -----------
 
